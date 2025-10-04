@@ -1,0 +1,108 @@
+{% extends 'partials/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+    <!--------------- cart-section---------------->
+    <section class="product-cart product footer-padding">
+        <div class="container">
+            
+            <div class="cart-section">
+                <table>
+                    <tbody>
+                        <tr class="table-row table-top-row">
+                            <td class="table-wrapper wrapper-product">
+                                <h5 class="table-heading">PRODUCT</h5>
+                            </td>
+                            <td class="table-wrapper">
+                                <div class="table-wrapper-center">
+                                    <h5 class="table-heading">PRICE</h5>
+                                </div>
+                            </td>
+                            <td class="table-wrapper">
+                                <div class="table-wrapper-center">
+                                    <h5 class="table-heading">QUANTITY</h5>
+                                </div>
+                            </td>
+                            <td class="table-wrapper wrapper-total">
+                                <div class="table-wrapper-center">
+                                    <h5 class="table-heading">TOTAL</h5>
+                                </div>
+                            </td>
+                            <td class="table-wrapper">
+                                <div class="table-wrapper-center">
+                                    <h5 class="table-heading">ACTION</h5>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% for item in items %}
+                            <tr class="table-row ticket-row item_div_{{item.id}}">
+                                <td class="table-wrapper wrapper-product">
+                                    <div class="wrapper">
+                                        <div class="wrapper-img">
+                                            <img src="{{item.product.image.url}}" alt="img">
+                                        </div>
+                                        <div class="wrapper-content">
+                                            <h5 class="heading">{{item.product.name}}</h5>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="heading main-price">${{item.product.price}}</h5>
+                                    </div>
+                                </td>
+
+                                <td class="table-wrapper">
+                                    <div class="table-wrapper-center">
+                                        <div class="quantity" style="margin: 0px;">
+                                            <button style="font-size: 18px;" type="button" class="minus update_cart_qty" data-update_type="decrease" data-item_id="{{item.id}}" data-product_id="{{item.product.id}}">
+                                                -
+                                            </button>
+
+                                            <input type="text" class="item-qty-{{item.id}}" value="{{item.qty}}" style="width: 1rem;" />
+
+                                            <button style="font-size: 18px;" type="button" class="plus update_cart_qty" data-update_type="increase" data-item_id="{{item.id}}" data-product_id="{{item.product.id}}">
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="table-wrapper wrapper-total">
+                                    <div class="table-wrapper-center">
+                                        <h5 class="heading total-price"> <span class="item_sub_total_{{item.id}}">${{item.sub_total|intcomma}}</span> </h5>
+                                    </div>
+                                </td>
+
+                                <td class="table-wrapper">
+                                    <button type="button" class="table-wrapper-center delete_cart_item" data-item_id="{{item.id}}" data-product_id="{{item.product.id}}">
+                                        <span style="font-size: 20px;" > x </span>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div> 
+                
+
+            
+
+
+            <div class="wishlist-btn cart-btn">
+                <a href="empty-cart.html" class="clean-btn">Clear Cart</a>
+                <a href="#" class="shop-btn update-btn">Update Cart</a>
+                <a href="checkout.html" class="shop-btn">Proceed to Checkout</a>
+            </div>
+        </div>
+    </section>
+    <!--------------- cart-section-end---------------->
+
+{% endblock content %}
+    
+        
+

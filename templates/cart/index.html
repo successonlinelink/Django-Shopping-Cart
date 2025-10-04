@@ -1,0 +1,58 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!--------------- fresh-section--------------->
+    <section class="product fresh">
+        <div class="container">
+
+            <div class="section-title">
+                <h3>Fresh Vegetables</h3>
+            </div>
+
+            <div class="fresh-section">
+                <div class="row g-5">
+                    
+                    {% for p in products %}
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="product-wrapper" data-aos="fade-up">
+                                <div class="product-img">
+                                    <img src="{{p.image.url}}" alt="product-img">
+                                </div>
+                                
+                                <div class="product-info">
+
+                                    <div class="product-description">
+                                        <a href=" url 'cart:product_detail' p.id  " class="product-details">
+                                            {{p.name}}
+                                        </a>
+                                        <div class="price">
+                                            <span class="price-cut">${{p.price}}</span>
+                                            <span class="new-price">${{p.regular_price}}</span>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" data-id="{{p.id}}" class="product-cart-btn product-btn mb-2 add_to_cart">
+                                        <span class="btn-text">Add To Cart</span>
+                                    </button>
+
+                                    <input type="hidden" class="quantity" value="1" />
+
+                                    <button class="product-cart-btn product-btn">
+                                        <span class="btn-text">Add To Wishlist</span>
+                                    </button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    
+        
+

@@ -1,0 +1,114 @@
+{% extends 'partials/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+    <!--------------- contact-section---------------->
+    <section class="contact product footer-padding">
+        <div class="container">
+            <div class="contact-section">
+                <div class="row">
+                    
+                    <div class=" ">
+                        <div class="question-section login-section ">
+                            <form method="POST" enctype="multipart/form-data" class="review-form box-shadows">
+                                {% csrf_token %}
+
+                                <div class="review-form-text">
+                                    <h5 class="comment-title">Create Product</h5>
+                                </div>
+                                
+                                <div class="review-form-name">
+                                    <!-- <label for="fname" class="form-label">Name*</label> -->
+                                    <image src="" id="imagePreview" style="width: 100%; height: 500; object-fit: cover; display: none;" class="form-control" >
+                                </div>
+
+                                <div class=" account-inner-form">
+                                    <div class="review-form-name">
+                                        <label for="fname" class="form-label">Product Thumbnail</label>
+                                        <input type="file" id="imageInput" name="image" class="form-control" accept="image/*" onchange="previewImage(event)" >
+                                    </div>
+
+                                    <div class="review-form-name">
+                                        <label for="title" class="form-label">Product Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Product Name">
+                                    </div>
+
+                                    <div class="review-form-name">
+                                        <label for="subject" class="form-label">Product Category</label>
+                                        <!-- <input type="text" id="subject" class="form-control" placeholder="Subject"> -->
+                                        <select name="category_id" id="" class="form-control">
+                                            <option value="">Select Category</option>
+                                            
+                                            {% for c in categories %}
+                                                <option value="{{c.id}}">{{c.title}}</option>
+                                            {% endfor %}
+                                                
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="review-textarea">
+                                    <label for="floatingTextarea">Product Description</label>
+                                    <textarea name="description" class="form-control" placeholder="Product Description"
+                                        id="floatingTextarea" rows="3"></textarea>
+                                </div>
+
+                                <div class=" account-inner-form">
+                                    <div class="review-form-name">
+                                        <label for="fname" class="form-label">Price</label>
+                                        <input type="text" id="" name="price" class="form-control" placeholder="Price">
+                                    </div>
+
+                                    <div class="review-form-name">
+                                        <label for="title" class="form-label">Regular Price</label>
+                                        <input type="text" name="regular_price" class="form-control" placeholder="Regular Price">
+                                    </div>
+                                </div>
+
+                                <div class=" account-inner-form">
+                                    <div class="review-form-name">
+                                        <label for="fname" class="form-label">Shipping</label>
+                                        <input type="number" id="" name="shipping" class="form-control" placeholder="Shipping">
+                                    </div>
+
+                                    <div class="review-form-name">
+                                        <label for="title" class="form-label">Stock</label>
+                                        <input type="text" name="stock" class="form-control"
+                                            placeholder="Stock">
+                                    </div>
+                                </div>
+
+
+                                <div class="login-btn">
+                                    <button type="submit" class="shop-btn">Send Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------------- contact-section-end---------------->
+
+    <script>
+        function previewImage(event) {
+            const imageInput = event.target.files[0]
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                const output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block'; // Show the image element
+            }
+            reader.readAsDataURL(imageInput);
+        }
+    </script>
+
+{% endblock content %}
+    
+        
+
